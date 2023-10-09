@@ -21,7 +21,7 @@ public class SocketClient1 {
         Socket socket = new Socket("localhost", 8888);
         while (socket.isConnected()) {
             sendMsg(socket);
-            receiveMsg(socket);
+//            receiveMsg(socket);
         }
     }
 

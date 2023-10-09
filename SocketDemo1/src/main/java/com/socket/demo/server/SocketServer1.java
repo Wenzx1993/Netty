@@ -44,7 +44,7 @@ public class SocketServer1 {
             System.out.println("接收到的消息：");
             byte[] cache = new byte[1024];
             int count = 0;
-            if ((count = is.read(cache)) > 0) {
+            while ((count = is.read(cache)) > 0) {
                 System.out.print(new String(cache, 0, count));
             }
             System.out.println();
@@ -59,7 +59,6 @@ public class SocketServer1 {
         try {
             os = socket.getOutputStream();
             os.write("请发送攻击".getBytes());
-            os.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
