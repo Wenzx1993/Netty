@@ -40,9 +40,8 @@ public class ServerChannelHandler implements ChannelInboundHandler {
      */
     @Override
     public void channelRead(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
-        ByteBuf byteBuf = (ByteBuf) o;
-        System.out.println("客户端发来的消息：");
-        System.out.print(byteBuf.toString(CharsetUtil.UTF_8));
+        System.out.println("客户端发来的消息：" +o);
+
     }
 
     /**
@@ -53,8 +52,7 @@ public class ServerChannelHandler implements ChannelInboundHandler {
      */
     @Override
     public void channelReadComplete(ChannelHandlerContext channelHandlerContext) throws Exception {
-        ByteBuf byteBuf = Unpooled.copiedBuffer("你好，已收到您的消息", CharsetUtil.UTF_8);
-        channelHandlerContext.writeAndFlush(byteBuf);
+        channelHandlerContext.writeAndFlush("你好，已收到您的消息");
     }
 
     @Override
@@ -79,6 +77,7 @@ public class ServerChannelHandler implements ChannelInboundHandler {
 
     /**
      * 异常发生事件
+     *
      * @param channelHandlerContext
      * @param throwable
      * @throws Exception

@@ -1,5 +1,8 @@
 package com.example.netty.server;
 
+import com.example.netty.codec.MessageCodec;
+import com.example.netty.decoder.MessageDecoder;
+import com.example.netty.encoder.MessageEncoder;
 import com.example.netty.server.handler.ServerChannelHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -49,6 +52,11 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel channel) throws Exception {
+//                        //设置编码
+//                        channel.pipeline().addLast(new MessageEncoder());
+//                        //设置解码
+//                        channel.pipeline().addLast(new MessageDecoder());
+                        channel.pipeline().addLast(new MessageCodec());
                         //设置自定义通道事件处理器
                         channel.pipeline().addLast(new ServerChannelHandler());
                     }

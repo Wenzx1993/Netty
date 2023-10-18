@@ -1,6 +1,7 @@
 package com.example.netty.client;
 
 import com.example.netty.client.handler.ClientChannelHandler;
+import com.example.netty.codec.MessageCodec;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -36,6 +37,12 @@ public class NettyClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
+//                        //设置解码
+//                        socketChannel.pipeline().addLast(new MessageDecoder());
+//                        //设置编码
+//                        socketChannel.pipeline().addLast(new MessageEncoder());
+                        //设置编解码器
+                        socketChannel.pipeline().addLast(new MessageCodec());
                         //设置自定义通道事件处理器
                         socketChannel.pipeline().addLast(new ClientChannelHandler());
                     }
@@ -44,6 +51,6 @@ public class NettyClient {
         ChannelFuture channelFuture = bootstrap.connect("localhost", 8888).sync();
         System.out.println("客户端已启动");
         //关闭客户端线程组
-        clientGroup.shutdownGracefully();
+//        clientGroup.shutdownGracefully();
     }
 }

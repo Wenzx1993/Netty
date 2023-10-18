@@ -29,7 +29,7 @@ public class ServerSocketChannelServer {
         ServerSocketChannel socketChannel = ServerSocketChannel.open();
         //绑定对应的端口
         socketChannel.bind(new InetSocketAddress(8888));
-        //设置通道为阻塞
+        //设置通道为非阻塞
         socketChannel.configureBlocking(false);
         //处理连接请求
         while (true) {
